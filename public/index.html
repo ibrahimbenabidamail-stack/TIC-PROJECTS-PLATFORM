@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIC Projects Platform</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.2);
+      color: #fff;
+      padding: 30px 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    .card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #667eea;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #667eea;
+      color: #fff;
+      border-radius: 8px;
+      margin: 5px 5px 5px 0;
+      transition: background 0.3s ease, transform 0.2s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background: #764ba2;
+      transform: scale(1.05);
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .form-section {
+      display: none;
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+    }
+
+    .message {
+      margin-top: 15px;
+      padding: 10px 15px;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .message.success {
+      background: #d4edda;
+      color: #155724;
+      display: block;
+    }
+
+    .message.error {
+      background: #f8d7da;
+      color: #721c24;
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .card h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>TIC Projects Platform</h1>
+    <p>Manage your projects, groups, and reviews seamlessly</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Welcome!</h2>
+      <p>Welcome to the TIC Projects Platform. A modern, intuitive system for managing student projects and collaboration.</p>
+      <button class="btn" onclick="toggleForm('login')">Login</button>
+      <button class="btn btn-secondary" onclick="toggleForm('register')">Create Account</button>
+
+      <div id="loginForm" class="form-section">
+        <h3>Login</h3>
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" required>
+          </div>
+          <button type="submit" class="btn">Login</button>
+          <button type="button" class="btn btn-secondary" onclick="toggleForm('none')">Cancel</button>
+        </form>
+        <div id="loginMessage" class="message"></div>
+      </div>
+
+      <div id="registerForm" class="form-section">
+        <h3>Create Account</h3>
+        <form onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label for="register-name">Full Name</label>
+            <input type="text" id="register-name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" name="password" required>
+          </div>
+          <button type="submit" class="btn">Register</button>
+          <button type="button" class="btn btn-secondary" onclick="toggleForm('none')">Cancel</button>
+        </form>
+        <div id="registerMessage" class="message"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Features</h2>
+      <p><strong>✓ Secure Authentication</strong> - Passwords are encrypted with bcrypt</p>
+      <p><strong>✓ JWT Tokens</strong> - Session management with JSON Web Tokens</p>
+      <p><strong>✓ Modern Design</strong> - Responsive and intuitive interface</p>
+      <p><strong>✓ Built for Students</strong> - Simple and effective project management</p>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 TIC Projects Platform — Student Project
+  </footer>
+
+  <script>
+    function toggleForm(formName) {
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+
+      if (formName === 'login') {
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
+      } else if (formName === 'register') {
+        registerForm.classList.add('active');
+        loginForm.classList.remove('active');
+      } else {
+        loginForm.classList.remove('active');
+        registerForm.classList.remove('active');
+      }
+    }
+
+    async function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      const messageDiv = document.getElementById('loginMessage');
+
+      try {
+        const response = await fetch('/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          messageDiv.className = 'message success';
+          messageDiv.textContent = `Login successful! Token: ${data.token.substring(0, 20)}...`;
+          localStorage.setItem('token', data.token);
+          setTimeout(() => location.reload(), 2000);
+        } else {
+          messageDiv.className = 'message error';
+          messageDiv.textContent = data.error || 'Login failed';
+        }
+      } catch (error) {
+        messageDiv.className = 'message error';
+        messageDiv.textContent = 'Error: ' + error.message;
+      }
+    }
+
+    async function handleRegister(event) {
+      event.preventDefault();
+      const name = document.getElementById('register-name').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      const messageDiv = document.getElementById('registerMessage');
+
+      try {
+        const response = await fetch('/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          messageDiv.className = 'message success';
+          messageDiv.textContent = `Registration successful! Token: ${data.token.substring(0, 20)}...`;
+          localStorage.setItem('token', data.token);
+          setTimeout(() => location.reload(), 2000);
+        } else {
+          messageDiv.className = 'message error';
+          messageDiv.textContent = data.error || 'Registration failed';
+        }
+      } catch (error) {
+        messageDiv.className = 'message error';
+        messageDiv.textContent = 'Error: ' + error.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
