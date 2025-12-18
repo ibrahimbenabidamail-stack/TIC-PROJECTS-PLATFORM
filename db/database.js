@@ -40,5 +40,15 @@ db.exec(`
     FOREIGN KEY (reviewer_id) REFERENCES users(id)
   )
 `);
+db.exec(`
+  CREATE TABLE IF NOT EXISTS project_files (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id INTEGER NOT NULL,
+    file_path TEXT NOT NULL,
+    uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (project_id) REFERENCES projects(id)
+  )
+`);
+
 
 export default db;

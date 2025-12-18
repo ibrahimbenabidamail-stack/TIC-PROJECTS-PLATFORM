@@ -33,9 +33,9 @@ router.post("/register", async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    
+
     const result = db.prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)").run(username, email, hashedPassword);
-    
+
     const token = jwt.sign(
       { id: result.lastInsertRowid, username, email },
       JWT_SECRET,
@@ -99,7 +99,7 @@ router.get("/me", (req, res) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const user = db.prepare("SELECT id, username, email, created_at FROM users WHERE id = ?").get(decoded.id);
-    
+
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
