@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TIC Projects Platform</title>
+  <title>TIC Projects Platform - Student Project Management</title>
   <style>
     * {
       margin: 0;
@@ -13,320 +13,347 @@
     }
 
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #333;
-      line-height: 1.6;
+      background: #f4f6f8;
       min-height: 100vh;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    header {
-      background: rgba(0, 0, 0, 0.2);
-      color: #fff;
-      padding: 30px 0;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 5px;
-      font-weight: 700;
-    }
-
-    header p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
+    nav {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 15px 30px;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    nav .nav-links {
+      display: flex;
+      align-items: center;
       gap: 20px;
     }
 
-    .card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    nav .nav-links a {
+      font-weight: 400;
+      transition: opacity 0.3s;
     }
 
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    nav .nav-links a:hover {
+      opacity: 0.8;
     }
 
-    .card h2 {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      color: #667eea;
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: white;
     }
 
-    .card p {
-      font-size: 1rem;
-      color: #666;
-      margin-bottom: 15px;
+    .user-info span {
+      font-weight: 500;
+    }
+
+    .btn-logout {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-logout:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     .btn {
-      display: inline-block;
-      padding: 12px 24px;
-      background: #667eea;
-      color: #fff;
+      padding: 14px 32px;
       border-radius: 8px;
-      margin: 5px 5px 5px 0;
-      transition: background 0.3s ease, transform 0.2s ease;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: inline-block;
     }
 
-    .btn:hover {
-      background: #764ba2;
-      transform: scale(1.05);
+    .btn-primary {
+      background: white;
+      color: #667eea;
     }
 
     .btn-secondary {
-      background: #f0f0f0;
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
       color: #333;
-    }
-
-    .btn-secondary:hover {
-      background: #e0e0e0;
-    }
-
-    .form-section {
-      display: none;
-      background: #f9f9f9;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
-
-    .form-section.active {
-      display: block;
-    }
-
-    .form-group {
       margin-bottom: 15px;
     }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 600;
+    .section-title p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+    }
+
+    .feature-card h3 {
       color: #333;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
     }
 
-    .form-group input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 1rem;
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
     }
 
-    .form-group input:focus {
-      outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+    .cta-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 60px 20px;
+      text-align: center;
+      color: white;
+      margin-top: 60px;
     }
 
-    .message {
-      margin-top: 15px;
-      padding: 10px 15px;
-      border-radius: 6px;
-      display: none;
+    .cta-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
     }
 
-    .message.success {
-      background: #d4edda;
-      color: #155724;
-      display: block;
-    }
-
-    .message.error {
-      background: #f8d7da;
-      color: #721c24;
-      display: block;
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
     }
 
     footer {
+      background: #2d3436;
+      color: #b2bec3;
       text-align: center;
-      padding: 30px 0;
-      color: rgba(255, 255, 255, 0.8);
-      margin-top: 40px;
+      padding: 30px 20px;
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.8rem;
+    footer a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
       }
 
-      .card {
-        padding: 20px;
+      .hero p {
+        font-size: 1rem;
       }
 
-      .card h2 {
-        font-size: 1.3rem;
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
       }
     }
   </style>
 </head>
 <body>
+  <nav>
+    <a href="/">TIC Projects</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/projects.html">Projects</a>
+      <div id="authNav"></div>
+    </div>
+  </nav>
 
-  <header>
+  <section class="hero">
     <h1>TIC Projects Platform</h1>
-    <p>Manage your projects, groups, and reviews seamlessly</p>
-  </header>
+    <p>A modern platform for students to showcase their projects, collaborate with peers, and build their portfolio.</p>
+    <div class="hero-buttons">
+      <a href="/projects.html" class="btn btn-primary">Browse Projects</a>
+      <a href="/register.html" class="btn btn-secondary" id="ctaBtn">Get Started</a>
+    </div>
+  </section>
 
-  <main>
-    <div class="card">
-      <h2>Welcome!</h2>
-      <p>Welcome to the TIC Projects Platform. A modern, intuitive system for managing student projects and collaboration.</p>
-      <button class="btn" onclick="toggleForm('login')">Login</button>
-      <button class="btn btn-secondary" onclick="toggleForm('register')">Create Account</button>
-
-      <div id="loginForm" class="form-section">
-        <h3>Login</h3>
-        <form onsubmit="handleLogin(event)">
-          <div class="form-group">
-            <label for="login-email">Email</label>
-            <input type="email" id="login-email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="login-password">Password</label>
-            <input type="password" id="login-password" name="password" required>
-          </div>
-          <button type="submit" class="btn">Login</button>
-          <button type="button" class="btn btn-secondary" onclick="toggleForm('none')">Cancel</button>
-        </form>
-        <div id="loginMessage" class="message"></div>
-      </div>
-
-      <div id="registerForm" class="form-section">
-        <h3>Create Account</h3>
-        <form onsubmit="handleRegister(event)">
-          <div class="form-group">
-            <label for="register-name">Full Name</label>
-            <input type="text" id="register-name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="register-email">Email</label>
-            <input type="email" id="register-email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="register-password">Password</label>
-            <input type="password" id="register-password" name="password" required>
-          </div>
-          <button type="submit" class="btn">Register</button>
-          <button type="button" class="btn btn-secondary" onclick="toggleForm('none')">Cancel</button>
-        </form>
-        <div id="registerMessage" class="message"></div>
-      </div>
+  <div class="container">
+    <div class="section-title">
+      <h2>Why TIC Projects?</h2>
+      <p>Everything you need to manage and showcase your student projects</p>
     </div>
 
-    <div class="card">
-      <h2>Features</h2>
-      <p><strong>✓ Secure Authentication</strong> - Passwords are encrypted with bcrypt</p>
-      <p><strong>✓ JWT Tokens</strong> - Session management with JSON Web Tokens</p>
-      <p><strong>✓ Modern Design</strong> - Responsive and intuitive interface</p>
-      <p><strong>✓ Built for Students</strong> - Simple and effective project management</p>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>Project Showcase</h3>
+        <p>Submit and display your projects with detailed descriptions. Let your work speak for itself and inspire others.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <h3>Secure Authentication</h3>
+        <p>Your account is protected with industry-standard bcrypt password hashing and JWT token authentication.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3>Student Community</h3>
+        <p>Connect with fellow students, explore their projects, and learn from each other's work and experiences.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Responsive Design</h3>
+        <p>Access the platform from any device. Our modern interface works perfectly on desktop, tablet, and mobile.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Fast & Reliable</h3>
+        <p>Built with Node.js and SQLite for lightning-fast performance and reliable data storage.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎓</div>
+        <h3>Built for Students</h3>
+        <p>Designed specifically for student needs. Simple, intuitive, and focused on what matters most.</p>
+      </div>
     </div>
-  </main>
+  </div>
+
+  <section class="cta-section">
+    <h2>Ready to Showcase Your Project?</h2>
+    <p>Join the TIC Projects community today and start building your portfolio.</p>
+    <a href="/register.html" class="btn btn-primary" id="ctaBtn2">Create Free Account</a>
+  </section>
 
   <footer>
-    &copy; 2025 TIC Projects Platform — Student Project
+    <p>&copy; 2025 TIC Projects Platform — Student Project</p>
+    <p style="margin-top: 10px;">Built with Node.js, Express, and SQLite</p>
   </footer>
 
   <script>
-    function toggleForm(formName) {
-      const loginForm = document.getElementById('loginForm');
-      const registerForm = document.getElementById('registerForm');
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
 
-      if (formName === 'login') {
-        loginForm.classList.add('active');
-        registerForm.classList.remove('active');
-      } else if (formName === 'register') {
-        registerForm.classList.add('active');
-        loginForm.classList.remove('active');
+    function updateAuthNav() {
+      const authNav = document.getElementById('authNav');
+      const ctaBtn = document.getElementById('ctaBtn');
+      const ctaBtn2 = document.getElementById('ctaBtn2');
+
+      if (token && user) {
+        authNav.innerHTML = `
+          <div class="user-info">
+            <span>Hi, ${user.username}</span>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+          </div>
+        `;
+        ctaBtn.textContent = 'My Projects';
+        ctaBtn.href = '/projects.html';
+        ctaBtn2.textContent = 'Submit Project';
+        ctaBtn2.href = '/projects.html';
       } else {
-        loginForm.classList.remove('active');
-        registerForm.classList.remove('active');
+        authNav.innerHTML = `
+          <a href="/login.html">Login</a>
+          <a href="/register.html">Register</a>
+        `;
       }
     }
 
-    async function handleLogin(event) {
-      event.preventDefault();
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
-      const messageDiv = document.getElementById('loginMessage');
-
-      try {
-        const response = await fetch('/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          messageDiv.className = 'message success';
-          messageDiv.textContent = `Login successful! Token: ${data.token.substring(0, 20)}...`;
-          localStorage.setItem('token', data.token);
-          setTimeout(() => location.reload(), 2000);
-        } else {
-          messageDiv.className = 'message error';
-          messageDiv.textContent = data.error || 'Login failed';
-        }
-      } catch (error) {
-        messageDiv.className = 'message error';
-        messageDiv.textContent = 'Error: ' + error.message;
-      }
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.reload();
     }
 
-    async function handleRegister(event) {
-      event.preventDefault();
-      const name = document.getElementById('register-name').value;
-      const email = document.getElementById('register-email').value;
-      const password = document.getElementById('register-password').value;
-      const messageDiv = document.getElementById('registerMessage');
-
-      try {
-        const response = await fetch('/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, password })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          messageDiv.className = 'message success';
-          messageDiv.textContent = `Registration successful! Token: ${data.token.substring(0, 20)}...`;
-          localStorage.setItem('token', data.token);
-          setTimeout(() => location.reload(), 2000);
-        } else {
-          messageDiv.className = 'message error';
-          messageDiv.textContent = data.error || 'Registration failed';
-        }
-      } catch (error) {
-        messageDiv.className = 'message error';
-        messageDiv.textContent = 'Error: ' + error.message;
-      }
-    }
+    updateAuthNav();
   </script>
-
 </body>
 </html>

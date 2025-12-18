@@ -22,7 +22,7 @@ externalPort = 3000
 
 [[ports]]
 localPort = 5000
-externalPort = 80
+externalPort = 5000
 
 [workflows]
 runButton = "Project"
@@ -47,3 +47,8 @@ waitForPort = 5000
 
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[userenv]
+
+[userenv.shared]
+JWT_SECRET = "tic-projects-platform-secret-key-2025"
